@@ -33,8 +33,8 @@ public class Resource {
 			result = "<h1>" + ro.description + "</h1>";
 		else
 			result = "<h1>" + pc.getProductTitle() + "</h1>" 
-							+ "<img src="+pc.getImageUrl()+"> <hr>"
-							+"<a href=\"https://github.com/maiorrulz/AmazonCrawler\" style=\"margin-left: 300px\">Source GitHub</a>" 
+							+ "<img src="+pc.getImageUrl()+">"
+							+"<a href=\"https://github.com/maiorrulz/AmazonCrawler\" style=\"margin-left: 450px\">Source GitHub</a><hr>" 
 							+"<div>"+ new Gson().toJson(pc.processedProduct()) +"</div>";
 		
 	    return Response.status(200)
