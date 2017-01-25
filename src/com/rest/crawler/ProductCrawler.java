@@ -69,7 +69,7 @@ public class ProductCrawler {
 				doc = Jsoup.connect(url)
 					  .data("query", "Java")
 					  .userAgent("Mozilla")
-					  .timeout(3000)
+					  .timeout(5000)
 					  .get();
 
 			
@@ -81,8 +81,10 @@ public class ProductCrawler {
 			
 			//getting link to comments;
 			Elements linksToComments = doc.select("a.a-link-emphasis.a-text-bold");
-			String linkToComments= linksToComments.size() > 0 ? linksToComments.first().attr("href") : null;
-			return new ReturnObject(Status.OK, linkToComments, "All Cool");
+			
+			return linksToComments.size() > 0 ? new ReturnObject(Status.OK,linksToComments.first().attr("href"),"All Chill") : 
+				new ReturnObject(Status.FAILED, null, "No Link to Review page. Check provided link");
+	
 			} catch (IOException e) {
 				System.out.println("Cannont connect to " + url+ "\n Exception : " + e);
 				return new ReturnObject(Status.ERROR, null, "Cannot connect to provided URL : " + url);
@@ -114,7 +116,7 @@ public class ProductCrawler {
 				doc = Jsoup.connect(commentsUrl)
 						  .data("query", "Java")
 						  .userAgent("Mozilla")
-						  .timeout(3000)
+						  .timeout(5000)
 						  .get();
 			} catch (IOException e) {
 				System.out.println("Cannont connect to " + commentsUrl + "\n Exception : " + e);

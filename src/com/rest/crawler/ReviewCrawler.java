@@ -28,7 +28,7 @@ public class ReviewCrawler implements Runnable {
 				doc = Jsoup.connect(url)
 						  .data("query", "Java")
 						  .userAgent("Mozilla")
-						  .timeout(3000)
+						  .timeout(5000)
 						  .get();
 			} catch (IOException e) {
 				System.out.println("Cannont connect to " + url+ "\n Exception : " + e);
