@@ -122,7 +122,17 @@ public class ProductCrawler {
 			}
 			Elements li = doc.select("li[data-reftag]");
 			String url = li.last().child(0).attr("href");
-			int maxPage = Integer.parseInt((li.last().text()));
+			Pattern re = Pattern.compile("\\d+");
+			Matcher m = re.matcher((li.last().text()));
+			
+			//Remove spaces and commas and dots
+			StringBuilder maxPageString= new StringBuilder();
+		    while (m.find()){
+		      for( int groupIdx = 0; groupIdx < m.groupCount()+1; groupIdx++ ){
+		    	  maxPageString.append(m.group(groupIdx));
+		      }
+		    }
+			int maxPage = Integer.parseInt(maxPageString.toString());
 			
 			for(int i=1 ; i <= maxPage ; i++) {
 				String urlToReview = url.replaceFirst("(?<=ref=)[^&|?]+", "cm_cr_getr_d_paging_btm_" + i).replaceFirst("(?<=pageNumber=)[^&|?]+", "" + i);
